@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef ParentName="BaseDrug">
+        <defName>AIEnhancedSerum</defName>
+        <label>AI-enhanced serum</label>
+        <description>An experimental serum that temporarily boosts cognitive functions.</description>
+        <statBases>
+            <Addictiveness>0.03</Addictiveness>
+        </statBases>
+        <comps>
+            <!-- Effects -->
+            <li Class="CompProperties_UseEffect">
+                <compClass>CompUseEffect_ActivateAI</compClass>
+            </li> <!-- Add the closing tag for the <li> element -->
+        </comps>
+    </ThingDef>
+</Defs>

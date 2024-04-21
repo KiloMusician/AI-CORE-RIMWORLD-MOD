@@ -1,0 +1,49 @@
+<AICompanionCore>
+    <ModInfo>
+        <Name>RimWorld AI Enhanced Gameplay Mod</Name>
+        <Description>Introduces advanced AI and machine learning capabilities to enhance gameplay dynamics and colonist interactions.</Description>
+        <Version>1.0</Version>
+        <Author>Your Name</Author>
+    </ModInfo>
+    <Components>
+        <Component Name="AI Core">
+            <Description>Handles all AI decision making processes.</Description>
+            <Files>
+                <File>Source/AI/Core/AICore.cs</File>
+                <File>Source/AI/Core/DecisionTree.cs</File>
+            </Files>
+        </Component>
+        <Component Name="Learning Algorithms">
+            <Description>Manages adaptive learning and natural language processing for NPCs.</Description>
+            <Files>
+                <File>Source/AI/Learning/NLPProcessor.cs</File>
+                <File>Source/AI/Learning/LearningModule.cs</File>
+            </Files>
+        </Component>
+        <Component Name="Health Management">
+            <Description>Oversees health-related functionalities, including checks and treatments based on AI decisions.</Description>
+            <Files>
+                <File>Source/Health/HealthManager.cs</File>
+                <File>Source/Health/TreatmentSimulator.cs</File>
+            </Files>
+        </Component>
+        <Component Name="User Interface">
+            <Description>Manages all user interface elements that allow interaction with the AI systems.</Description>
+            <Files>
+                <File>Source/UI/Widgets/CommandConsole.cs</File>
+                <File>Source/UI/Widgets/HealthStatusWidget.cs</File>
+                <File>Source/UI/Dialogs/Dialog_AIInteraction.cs</File>
+            </Files>
+        </Component>
+    </Components>
+    <Dependencies>
+        <Dependency Name="Harmony">
+            <Version>2.0.4</Version>
+            <Description>A library for patching, replacing and decorating .NET and Mono methods during runtime.</Description>
+        </Dependency>
+        <Dependency Name="HugsLib">
+            <Version>7.2.1</Version>
+            <Description>Provides shared functionality for other mods and enhances mod management capabilities.</Description>
+        </Dependency>
+    </Dependencies>
+</AICompanionCore>
