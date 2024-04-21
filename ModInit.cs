@@ -1,6 +1,7 @@
 using System;
 using Verse;
 using RimWorld;
+using System.Diagnostics;
 
 namespace RimWorldAdvancedAIMod
 {
@@ -12,7 +13,14 @@ namespace RimWorldAdvancedAIMod
             try
             {
                 // Start a stopwatch for performance measurement
-                System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
+                Stopwatch stopwatch = Stopwatch.StartNew();
+
+                // Verify game and mod dependencies are loaded properly before initialization
+                if (!DependenciesLoadedCorrectly())
+                {
+                    Log.Error("RimWorld Advanced AI Mod initialization aborted: Dependencies not loaded.");
+                    return;  // Stop further initialization to prevent crashes due to missing dependencies
+                }
 
                 // Attempt to initialize the AI Manager
                 AIManager.Initialize();
@@ -37,6 +45,13 @@ namespace RimWorldAdvancedAIMod
             }
         }
 
+        // Check if all necessary dependencies are loaded correctly
+        private static bool DependenciesLoadedCorrectly()
+        {
+            // Example check (you should implement actual checks against the mod's dependencies)
+            return ModsConfig.ActiveModsInLoadOrder.Any(mod => mod.Name.Contains("RequiredDependency"));
+        }
+
         // Method to handle additional setup tasks
         private static void PerformAdditionalSetup()
         {
@@ -48,33 +63,25 @@ namespace RimWorldAdvancedAIMod
         // Method to handle failures during initialization
         private static void HandleInitializationFailure(Exception ex)
         {
-            // Check for specific exception types or conditions
+            // Implement specific logic for handling and possibly recovering from different types of exceptions
             if (ex is NullReferenceException)
             {
-                Log.Warning("Handling null reference encountered during initialization. Attempting to bypass...");
-                // Implement logic to bypass or correct the issue
+                Log.Warning("Null reference encountered during initialization. Attempting to bypass...");
             }
             else if (ex is TimeoutException)
             {
                 Log.Warning("Initialization timeout. Trying to reinitialize...");
-                // Re-attempt initialization or modify configuration settings
             }
             else
             {
                 Log.Warning("Encountered an unexpected error during initialization.");
-                // Handle other unexpected errors
             }
         }
 
         // Method to notify the user of a critical error if necessary
         private static void NotifyUserOfError(Exception ex)
         {
-            // Decide if user notification is necessary based on the exception severity
-            if (ex is NullReferenceException || ex is TimeoutException)
-            {
-                // Implement user notification, e.g., through a dialog box
-                Messages.Message("AI Initialization Error: " + ex.Message, MessageTypeDefOf.NegativeEvent, false);
-            }
+            Messages.Message("AI Initialization Error: " + ex.Message, MessageTypeDefOf.NegativeEvent, false);
         }
     }
 }
