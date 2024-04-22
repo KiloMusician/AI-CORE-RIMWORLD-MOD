@@ -1,6 +1,6 @@
 using System;
-using Verse; // Added import statement for Verse
-using RimWorld; // Added import statement for RimWorld
+using Verse;  // Ensures access to the Verse namespace
+using RimWorld;  // Ensures access to the RimWorld namespace
 
 namespace RimWorldAIEnhanced.Source.AI.Learning
 {
@@ -17,21 +17,49 @@ namespace RimWorldAIEnhanced.Source.AI.Learning
         // Method to handle learning from textual interactions
         public void LearnFromInteraction(string interactionText)
         {
-            // Process the text through NLP
-            var processedText = nlpProcessor.ProcessInput(interactionText);
+            try
+            {
+                // Ensure interaction text is not null or empty
+                if (string.IsNullOrEmpty(interactionText))
+                {
+                    Log.Warning("LearningModule: Received empty interaction text.");
+                    return;
+                }
 
-            // Generate a response based on the processing
-            var response = nlpProcessor.GenerateResponse(processedText);
+                // Process the text through NLP
+                var processedText = nlpProcessor.ProcessInput(interactionText);
 
-            // Simulated logging of the response for demonstration
-            Verse.Log.Message("LearningModule response: " + response); // Added 'Verse.' before 'Log.Message'
+                // Check if the processed text is valid
+                if (string.IsNullOrEmpty(processedText))
+                {
+                    Log.Warning("LearningModule: No valid output from NLP processor.");
+                    return;
+                }
+
+                // Generate a response based on the processed text
+                var response = nlpProcessor.GenerateResponse(processedText);
+
+                // Log the response for demonstration and debugging
+                Log.Message("LearningModule response: " + response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"LearningModule: Error during learning from interaction - {ex.Message}");
+            }
         }
 
         // Method to simulate the learning process over time
         public void UpdateLearning()
         {
-            // Simulated periodic learning update, which could involve adjusting internal models or parameters
-            Verse.Log.Message("LearningModule: Periodic learning update performed."); // Added 'Verse.' before 'Log.Message'
+            try
+            {
+                // Simulated periodic learning update, which could involve adjusting internal models or parameters
+                Log.Message("LearningModule: Periodic learning update performed.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"LearningModule: Error during update learning - {ex.Message}");
+            }
         }
     }
 }
