@@ -1,0 +1,48 @@
+$projectRoot = "C:\RIMWORLD_MODDING\AI-CORE-RIMWORLD-MOD"
+$toolsDir = "$projectRoot\Tools"
+$toolPath = "$toolsDir\StaticAnalysisTool.exe"
+$logPath = "$projectRoot\Logs\analysis_results.log"
+
+# Ensure the Logs directory exists
+if (-Not (Test-Path "$projectRoot\Logs")) {
+    New-Item -Path "$projectRoot\Logs" -ItemType Directory
+    "Created Logs directory at $projectRoot\Logs" | Out-File $logPath -Append
+}
+
+# Check if the static analysis tool exists and is executable
+if (-Not (Test-Path $toolPath)) {
+    "Error: Static analysis tool not found at $toolPath" | Out-File $logPath -Append
+    exit
+}
+
+# Prepare arguments for running the static analysis tool with detailed output
+$arguments = "--input `"$projectRoot\Source`" --output `"$logPath`" --format detailed"
+
+# Execute the static analysis tool
+try {
+    "Running static analysis on the project..." | Out-File $logPath -Append
+    & $toolPath $arguments | Out-File $logPath -Append
+    if ($LASTEXITCODE -eq 0) {
+        "Static analysis completed successfully." | Out-File $logPath -Append
+    } else {
+        Throw "Static analysis tool exited with code $LAST_EXIT_CODE"
+    }
+} catch {
+    "An error occurred during static analysis: $($_.Exception.Message)" | Out-File $logPath -Append
+}
+
+# Check for results and provide detailed logging
+if (Test-Path $logPath) {
+    $results = Get-Content $logPath
+    if ($results.Count -gt 0) {
+        "Analysis Results Found:" | Out-File $logPath -Append
+        $results | Out-File $logPath -Append
+    } else {
+        "No issues found during analysis." | Out-File $logPath -Append
+    }
+} else {
+    "No log file found. Analysis may not have run correctly." | Out-File $logPath -Append
+}
+
+# Optionally open the log file in the default text editor for review
+Start-Process "notepad.exe" $logPath
