@@ -9,9 +9,17 @@ namespace RimWorldAdvancedAIMod.AI
         // Method to check if a position is safe considering RimWorld's game mechanics
         public static bool IsPositionSafe(Map map, IntVec3 position)
         {
+            // Ensure the position is within the map bounds
+            if (!position.InBounds(map))
+            {
+                Log.Warning("Position out of map bounds.");
+                return false;
+            }
+
             // Check for terrain suitability
             if (!position.Standable(map) || position.Fogged(map))
             {
+                Log.Warning($"Position at {position} is not standable or is fogged.");
                 return false; // Not suitable for placement if the terrain isn't standable or is fogged
             }
 
@@ -20,6 +28,7 @@ namespace RimWorldAdvancedAIMod.AI
             {
                 if (pawn.HostileTo(Faction.OfPlayer) && pawn.Position.InHorDistOf(position, 10))
                 {
+                    Log.Message($"Position {position} is too close to hostile pawn {pawn.LabelShort}.");
                     return false; // Avoid placement within 10 cells of hostile pawns
                 }
             }
