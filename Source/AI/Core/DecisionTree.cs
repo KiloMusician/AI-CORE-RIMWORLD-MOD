@@ -5,40 +5,61 @@ namespace RimWorldAIEnhanced
 {
     public class DecisionTree
     {
-        // Root of the decision tree
         private DecisionNode rootNode;
 
-        // Constructor to create a decision tree with a default root node
         public DecisionTree()
         {
-            // Placeholder root node for the decision tree
-            rootNode = new DecisionNode(() => Console.WriteLine("Root decision executed."));
+            // Initialize the decision tree with a more complex root decision
+            rootNode = new DecisionNode(
+                () => Console.WriteLine("Evaluating root decision."),
+                new List<DecisionNode>
+                {
+                    new DecisionNode(() => Console.WriteLine("Performing action for condition A")),
+                    new DecisionNode(() => Console.WriteLine("Performing action for condition B"))
+                }
+            );
         }
 
-        // Method to execute the decision-making process
         public void MakeDecision()
         {
-            // Start decision-making from the root node
             rootNode.Evaluate();
         }
     }
 
-    // A class representing a node in the decision tree
     public class DecisionNode
     {
-        // Action to perform when this decision node is evaluated
         private Action action;
+        private List<DecisionNode> children;
 
-        // Constructor to create a decision node with a specific action
-        public DecisionNode(Action action)
+        // Optional: A condition to evaluate which child node to proceed with
+        public Func<bool> Condition { get; set; }
+
+        public DecisionNode(Action action, List<DecisionNode> children = null)
         {
             this.action = action;
+            this.children = children ?? new List<DecisionNode>();
         }
 
-        // Method to evaluate this node's decision
         public void Evaluate()
         {
             action.Invoke();
+
+            // Example condition evaluation: proceed with the first child if the condition is true
+            if (Condition != null && Condition.Invoke() && children.Count > 0)
+            {
+                children[0].Evaluate();
+            }
+            else if (children.Count > 1)
+            {
+                // If there's no condition or it's false, proceed with the second child
+                children[1].Evaluate();
+            }
+        }
+
+        // Method to add a child node
+        public void AddChild(DecisionNode node)
+        {
+            children.Add(node);
         }
     }
 }
