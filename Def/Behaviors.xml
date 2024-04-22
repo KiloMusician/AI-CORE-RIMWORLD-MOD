@@ -2,7 +2,7 @@
 <Defs>
     <JobDef>
         <defName>UseAIComputer</defName>
-        <driverClass>JobDriver_UseComputer</driverClass>
+        <driverClass>Path.To.Namespace.JobDriver_UseComputer</driverClass>
         <reportString>Using the AI-enhanced computer.</reportString>
-    </JobDef> <!-- Added closing tag for JobDef -->
+    </JobDef>
 </Defs>
