@@ -6,16 +6,27 @@ namespace RimWorldAIEnhanced.Source.AI.Learning
 {
     public class NLPProcessor
     {
+        private Random random = new Random(); // Ensures consistent random generation
+
         // Simulated method to parse and interpret natural language input from players or NPCs
         public Dictionary<string, float> ProcessInput(string input)
         {
-            // Placeholder: Break input into words, simulate understanding by assigning random relevance scores
-            var words = input.Split(' ');
+            // Check for null or empty input to prevent errors
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return new Dictionary<string, float>();
+            }
+
+            // Split input into words, simulate understanding by assigning relevance scores
+            var words = input.Split(new[] { ' ', ',', '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
             var scores = new Dictionary<string, float>();
             foreach (var word in words)
             {
-                // Random scoring for demonstration purposes
-                scores[word] = new Random().Next(0, 100) / 100.0f;
+                // Assign a more consistent random score to each unique word
+                if (!scores.ContainsKey(word))
+                {
+                    scores[word] = (float)Math.Round(random.NextDouble(), 2);
+                }
             }
             return scores;
         }
@@ -23,9 +34,14 @@ namespace RimWorldAIEnhanced.Source.AI.Learning
         // Simulated method to generate a response based on processed input
         public string GenerateResponse(Dictionary<string, float> processedInput)
         {
-            // Simple response generation by selecting the highest scored word
-            var highestScoredWord = processedInput.OrderByDescending(kvp => kvp.Value).First().Key;
-            return $"Did you mean: {highestScoredWord}?";
+            if (processedInput == null || !processedInput.Any())
+            {
+                return "I didn't catch that, could you repeat?";
+            }
+
+            // Select the highest scored word to generate a more meaningful response
+            var highestScoredWord = processedInput.OrderByDescending(kvp => kvp.Value).FirstOrDefault();
+            return $"It seems you are interested in: {highestScoredWord.Key} ({highestScoredWord.Value * 100}% relevance).";
         }
     }
 }
