@@ -1,0 +1,49 @@
+using System;
+using System.IO;
+
+namespace StaticAnalysisTool
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Check command line arguments for the directory to analyze
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Error: No directory specified.");
+                return;
+            }
+
+            string directory = args[0];
+
+            // List of critical files you expect to exist in the directory
+            string[] criticalFiles = {
+                "ModController.cs",
+                "Program.cs",
+                "About\\about.xml",
+                "Def\\Items.xml"
+            };
+
+            bool allFilesExist = true;
+
+            foreach (string file in criticalFiles)
+            {
+                string fullPath = Path.Combine(directory, file);
+                if (!File.Exists(fullPath))
+                {
+                    Console.WriteLine($"Missing critical file: {fullPath}");
+                    allFilesExist = false;
+                }
+            }
+
+            if (allFilesExist)
+            {
+                Console.WriteLine("All critical files are present.");
+            }
+            else
+            {
+                Console.WriteLine("Some critical files are missing.");
+            }
+        }
+    }
+}
