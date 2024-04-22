@@ -7,8 +7,11 @@ namespace RimWorldAIEnhanced.Source.UI.Dialogs
     {
         private string interactionText = "";
         private string responseText = "Waiting for input...";
+        private Vector2 responseScrollPosition = Vector2.zero;
+        private bool isProcessing = false;
 
-        // Constructor
+        public override Vector2 InitialSize => new Vector2(600f, 400f);
+
         public Dialog_AIInteraction()
         {
             this.doCloseX = true;
@@ -17,32 +20,36 @@ namespace RimWorldAIEnhanced.Source.UI.Dialogs
             this.closeOnClickedOutside = true;
         }
 
-        public override Vector2 InitialSize => new Vector2(600f, 350f);
-
         public override void DoWindowContents(Rect inRect)
         {
-            // Text field for interaction input
-            Rect textFieldRect = new Rect(inRect.x, inRect.y, inRect.width, 30f);
+            Rect textFieldRect = new Rect(inRect.x + 10, inRect.y + 10, inRect.width - 20, 30f);
             interactionText = Widgets.TextField(textFieldRect, interactionText);
 
-            // Response display
-            Rect responseRect = new Rect(inRect.x, textFieldRect.yMax + 10f, inRect.width, 100f);
-            Widgets.Label(responseRect, responseText);
-
-            // Submit button
-            Rect buttonRect = new Rect(inRect.x, responseRect.yMax + 10f, inRect.width, 30f);
-            if (Widgets.ButtonText(buttonRect, "Interact"))
+            Rect buttonRect = new Rect(inRect.x + 10, textFieldRect.yMax + 10, inRect.width - 20, 30f);
+            if (Widgets.ButtonText(buttonRect, "Interact") && !isProcessing)
             {
-                // Replace the placeholder code with actual AI response
-                responseText = GetAIResponse(interactionText);
+                responseText = "Processing...";
+                isProcessing = true;
+                LongEventHandler.QueueLongEvent(() => 
+                {
+                    responseText = GetAIResponse(interactionText);
+                    isProcessing = false;
+                }, "AIProcessing", false, null);
             }
+
+            Rect responseLabelRect = new Rect(inRect.x + 10, buttonRect.yMax + 10, inRect.width - 20, inRect.height - buttonRect.yMax - 20);
+            Widgets.LabelScrollable(responseLabelRect, responseText, ref responseScrollPosition);
         }
 
-        // Method to get AI response
         private string GetAIResponse(string input)
         {
-            // Replace this with actual AI logic to generate response
-            return "Response: " + input;
+            if (string.IsNullOrWhiteSpace(input))
+                return "Please enter some text to interact with AI.";
+
+            // Simulate processing delay
+            System.Threading.Thread.Sleep(1000); // This would be replaced with actual asynchronous AI processing call
+
+            return "Response: " + input; // Replace this with actual logic to generate response
         }
     }
 }
