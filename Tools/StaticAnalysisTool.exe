@@ -1,5 +1,10 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+using System.IO;
+using System.Collections.Generic;
 
 namespace StaticAnalysisTool
 {
@@ -7,26 +12,31 @@ namespace StaticAnalysisTool
     {
         static void Main(string[] args)
         {
-            // Check command line arguments for the directory to analyze
+            // Ensure directory to analyze is specified
             if (args.Length == 0)
             {
-                Console.WriteLine("Error: No directory specified.");
+                Console.WriteLine("Error: No directory specified. Usage: StaticAnalysisTool.exe <directory path>");
                 return;
             }
 
             string directory = args[0];
+            if (!Directory.Exists(directory))
+            {
+                Console.WriteLine($"Error: The specified directory does not exist: {directory}");
+                return;
+            }
 
-            // List of critical files you expect to exist in the directory
-            string[] criticalFiles = {
-                "ModController.cs",
-                "Program.cs",
-                "About\\about.xml",
-                "Def\\Items.xml"
+            // Define expected critical files and their basic checks
+            var criticalFiles = new Dictionary<string, Func<string, bool>>
+            {
+                ["ModController.cs"] = path => FileContainsText(path, "class ModController"),
+                ["Program.cs"] = path => FileContainsText(path, "static void Main"),
+                ["About\\about.xml"] = path => FileContainsText(path, "<ModMetaData>"),
+                ["Def\\Items.xml"] = path => FileContainsText(path, "<ThingDef>")
             };
 
             bool allFilesExist = true;
-
-            foreach (string file in criticalFiles)
+            foreach (var file in criticalFiles.Keys)
             {
                 string fullPath = Path.Combine(directory, file);
                 if (!File.Exists(fullPath))
@@ -34,16 +44,20 @@ namespace StaticAnalysisTool
                     Console.WriteLine($"Missing critical file: {fullPath}");
                     allFilesExist = false;
                 }
+                else if (!criticalFiles[file](fullPath))
+                {
+                    Console.WriteLine($"Validation failed for file: {fullPath}");
+                    allFilesExist = false;
+                }
             }
 
-            if (allFilesExist)
-            {
-                Console.WriteLine("All critical files are present.");
-            }
-            else
-            {
-                Console.WriteLine("Some critical files are missing.");
-            }
+            Console.WriteLine(allFilesExist ? "All critical files are present and valid." : "Some critical files are missing or invalid.");
+        }
+
+        // Utility method to check if a file contains a specific text
+        private static bool FileContainsText(string filePath, string text)
+        {
+            return File.ReadAllLines(filePath).Any(line => line.Contains(text));
         }
     }
 }
