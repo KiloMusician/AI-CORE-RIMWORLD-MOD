@@ -19,7 +19,7 @@ namespace RimWorldAIEnhanced.Source.Utils
         }
 
         // A generic method to safely try an action and log any exceptions
-        public static void TryAction(Action action)
+        public static void TryAction(Action action, Action<Exception> errorCallback = null)
         {
             try
             {
@@ -27,7 +27,8 @@ namespace RimWorldAIEnhanced.Source.Utils
             }
             catch (Exception ex)
             {
-                Logger.LogError("Failed to execute action: " + ex.Message);
+                Logger.LogError("Failed to execute action: " + ex.ToString()); // Includes the stack trace in the log
+                errorCallback?.Invoke(ex);
             }
         }
 
