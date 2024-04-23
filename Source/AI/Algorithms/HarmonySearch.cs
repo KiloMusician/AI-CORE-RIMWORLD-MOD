@@ -1,117 +1,126 @@
 using System;
 using System.Collections.Generic;
-using Verse;  // RimWorld's base namespace for many game-related classes
-using RimWorld;  // Namespace for RimWorld-specific classes
+using Verse;
+using RimWorld;
 
 namespace RimWorldAdvancedAIMod.AI
 {
-    // HarmonySearch class to implement the Harmony Search optimization algorithm
-    public class HarmonySearch
+    public class TaskOptimizationManager
     {
-        private int memorySize;  // Harmony Memory Size (HMS)
-        private double harmonyMemoryConsiderationRate;  // Harmony Memory Considering Rate (HMCR)
-        private double pitchAdjustingRate;  // Pitch Adjusting Rate (PAR)
-        private int numberOfVariables;  // Number of decision variables
-        private List<double[]> harmonyMemory;  // Memory storing various solution vectors
+        private int memorySize;
+        private double harmonyMemoryConsiderationRate;
+        private double pitchAdjustingRate;
+        private List<int[]> harmonyMemory;
         private Random rand = new Random();
 
-        public HarmonySearch(int memorySize, double considerationRate, double pitchRate, int variables)
+        public List<Task> TaskList { get; private set; }
+        public int TaskCount => TaskList.Count;
+
+        public TaskOptimizationManager(int memorySize, double considerationRate, double pitchRate, List<Task> tasks)
         {
             this.memorySize = memorySize;
             this.harmonyMemoryConsiderationRate = considerationRate;
             this.pitchAdjustingRate = pitchRate;
-            this.numberOfVariables = variables;
-            this.harmonyMemory = new List<double[]>(memorySize);
+            this.TaskList = tasks;
+            this.harmonyMemory = new List<int[]>(memorySize);
         }
 
-        // Initialize the Harmony Memory with random solutions
-        public void InitializeHarmonyMemory()
+        public void InitializeTaskAssignments()
         {
             for (int i = 0; i < memorySize; i++)
             {
-                double[] solution = new double[numberOfVariables];
-                for (int var = 0; var < numberOfVariables; var++)
+                int[] assignment = new int[TaskCount];
+                for (int taskIndex = 0; taskIndex < TaskCount; taskIndex++)
                 {
-                    solution[var] = rand.NextDouble();  // Random initialization
+                    assignment[taskIndex] = rand.Next(0, TaskCount); // Random assignment
                 }
-                harmonyMemory.Add(solution);
+                harmonyMemory.Add(assignment);
             }
         }
 
-        // Generate a new harmony vector
-        public double[] GenerateNewHarmony()
+        public int[] GenerateNewHarmony()
         {
-            double[] newHarmony = new double[numberOfVariables];
-            for (int var = 0; var < numberOfVariables; var++)
+            int[] newHarmony = new int[TaskCount];
+            for (int taskIndex = 0; taskIndex < TaskCount; taskIndex++)
             {
                 if (rand.NextDouble() < harmonyMemoryConsiderationRate)
                 {
-                    // Choose a value from the harmony memory
                     int memoryIndex = rand.Next(memorySize);
-                    newHarmony[var] = harmonyMemory[memoryIndex][var];
+                    newHarmony[taskIndex] = harmonyMemory[memoryIndex][taskIndex];
 
-                    // Consider pitch adjusting
                     if (rand.NextDouble() < pitchAdjustingRate)
                     {
-                        // Adjust the pitch randomly
-                        newHarmony[var] += (rand.NextDouble() * 2 - 1) * 0.1;  // Example adjustment
+                        newHarmony[taskIndex] = (newHarmony[taskIndex] + rand.Next(-1, 2)) % TaskCount; // Adjust the assignment randomly
                     }
                 }
                 else
                 {
-                    // Generate a random value
-                    newHarmony[var] = rand.NextDouble();
+                    newHarmony[taskIndex] = rand.Next(0, TaskCount); // Random assignment
                 }
             }
             return newHarmony;
         }
 
-        // Update the Harmony Memory with a new solution
-        public void UpdateHarmonyMemory(double[] newHarmony)
+        public void UpdateHarmonyMemory(int[] newHarmony)
         {
-            // Find and replace the worst harmony in the memory if the new harmony is better
             int worstIndex = 0;
-            double worstValue = CalculateObjective(harmonyMemory[0]);
+            double worstValue = CalculateObjectiveValue(harmonyMemory[0]);
             for (int i = 1; i < memorySize; i++)
             {
-                double currentValue = CalculateObjective(harmonyMemory[i]);
-                if (currentValue > worstValue)  // Assuming a minimization problem
+                double currentValue = CalculateObjectiveValue(harmonyMemory[i]);
+                if (currentValue > worstValue)
                 {
                     worstValue = currentValue;
                     worstIndex = i;
                 }
             }
 
-            double newHarmonyValue = CalculateObjective(newHarmony);
+            double newHarmonyValue = CalculateObjectiveValue(newHarmony);
             if (newHarmonyValue < worstValue)
             {
                 harmonyMemory[worstIndex] = newHarmony;
             }
         }
 
-        // Objective function to evaluate solutions (Example: Minimize distance or maximize resources)
-        private double CalculateObjective(double[] solution)
+        private double CalculateObjectiveValue(int[] assignment)
         {
-            // This function should be defined according to specific mod needs
+            // Calculate the objective value based on the task assignments
+            // This function should be defined according to specific optimization needs
             double result = 0;
-            // Example: Sum of squared variables (simple quadratic function)
-            foreach (var value in solution)
+            // Example: Sum of task priorities
+            for (int taskIndex = 0; taskIndex < TaskCount; taskIndex++)
             {
-                result += value * value;
+                result += TaskList[taskIndex].Priority;
             }
             return result;
         }
 
-        // Example method to run the Harmony Search optimization
+        private int[] GetOptimizedTaskAssignments()
+        {
+            int bestIndex = 0;
+            double bestValue = CalculateObjectiveValue(harmonyMemory[0]);
+            for (int i = 1; i < memorySize; i++)
+            {
+                double currentValue = CalculateObjectiveValue(harmonyMemory[i]);
+                if (currentValue < bestValue)
+                {
+                    bestValue = currentValue;
+                    bestIndex = i;
+                }
+            }
+
+            return harmonyMemory[bestIndex];
+        }
+
         public void RunOptimization()
         {
-            InitializeHarmonyMemory();
-            for (int iteration = 0; iteration < 100; iteration++)  // Example: 100 iterations
+            InitializeTaskAssignments();
+            for (int iteration = 0; iteration < 100; iteration++)
             {
-                double[] newHarmony = GenerateNewHarmony();
+                int[] newHarmony = GenerateNewHarmony();
                 UpdateHarmonyMemory(newHarmony);
             }
-            Log.Message("Harmony Search Optimization Completed.");
+            Log.Message("Task Optimization Completed.");
         }
     }
 }

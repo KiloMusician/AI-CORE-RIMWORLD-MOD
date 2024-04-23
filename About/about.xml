@@ -2,7 +2,7 @@
         <name>AI Enhanced Gameplay Mod for RimWorld</name>
         <author>Kilo.Musician</author>
     </ModMetaData>
-    http://github.com/KiloMusician/AIEnhancedGameplayMod
+    <link>http://github.com/KiloMusician/AIEnhancedGameplayMod</link>
     <description>
         Transform your RimWorld experience with the AI Enhanced Gameplay Mod, where advanced artificial intelligence breathes new life into every aspect of the game. This mod not only enhances NPC behavior but also deepens the interaction layers and strategic elements, providing a richer, more immersive gameplay experience. Key enhancements include:
         - Memory Dynamics: Colonists develop memories based on events and interactions, which affect their behavior and abilities.

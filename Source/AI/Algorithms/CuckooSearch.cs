@@ -1,20 +1,24 @@
 using System;
 using System.Collections.Generic;
-using Verse;  // RimWorld's base namespace for many game-related classes
-using RimWorld;  // Namespace for RimWorld-specific classes
+using Verse;
+using RimWorld;
 
 namespace RimWorldAdvancedAIMod.AI.Algorithms
 {
-    public class CuckooSearch
+    public class StrategicPlacementManager
     {
         private List<Nest> nests = new List<Nest>();
         private double[] bestNest;
         private double bestNestFitness = double.MaxValue;
         private int dimension;
         private Random random = new Random();
+        private World gameWorld;
+        private List<GameObject> objectsToPlace;
 
-        public CuckooSearch(int numberOfNests, int dimension)
+        public StrategicPlacementManager(World world, List<GameObject> objectsToPlace, int numberOfNests, int dimension)
         {
+            this.gameWorld = world;
+            this.objectsToPlace = objectsToPlace;
             this.dimension = dimension;
             bestNest = new double[dimension];
             InitializeNests(numberOfNests);
@@ -39,7 +43,15 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
             }
         }
 
-        public void PerformSearch()
+        public void FindOptimalPlacement(int iterations)
+        {
+            for (int i = 0; i < iterations; i++)
+            {
+                PerformSearch();
+            }
+        }
+
+        private void PerformSearch()
         {
             foreach (var nest in nests)
             {
@@ -87,14 +99,6 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
             // Evaluation logic based on your mod's requirements
             // For example, evaluating how optimal a placement or resource allocation is
             return random.NextDouble() * 100;  // Simplified example
-        }
-
-        public void Optimize(int iterations)
-        {
-            for (int i = 0; i < iterations; i++)
-            {
-                PerformSearch();
-            }
         }
 
         private class Nest

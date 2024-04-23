@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Verse;  // Base namespace for many game-related classes in RimWorld
-using RimWorld;  // Namespace for RimWorld-specific classes
+using Verse;
+using RimWorld;
 
 namespace RimWorldAdvancedAIMod.AI
 {
@@ -24,7 +24,7 @@ namespace RimWorldAdvancedAIMod.AI
             for (int i = 0; i < populationSize; i++)
             {
                 var individual = new Individual();
-                individual.RandomizeGenes();  // You'll define this method to randomize the starting genes
+                individual.RandomizeGenes();
                 population.Add(individual);
             }
         }
@@ -45,13 +45,12 @@ namespace RimWorldAdvancedAIMod.AI
                 }
 
                 population = newPopulation;
-                EvaluatePopulation();  // Assess the fitness of the entire population
+                EvaluatePopulation();
             }
         }
 
         private Individual SelectParent()
         {
-            // Implement a selection method like roulette wheel selection or tournament selection
             return population.RandomElementByWeight(p => p.Fitness);
         }
 
@@ -59,7 +58,7 @@ namespace RimWorldAdvancedAIMod.AI
         {
             if (Rand.Value < crossoverRate)
             {
-                return parent1.Combine(parent2);  // Define how two individuals combine their genes
+                return parent1.Combine(parent2);
             }
             return Rand.Bool ? parent1 : parent2;
         }
@@ -68,7 +67,7 @@ namespace RimWorldAdvancedAIMod.AI
         {
             if (Rand.Value < mutationRate)
             {
-                individual.Mutate();  // Implement a mutation method to alter the individual's genes
+                individual.Mutate();
             }
         }
 
@@ -76,14 +75,16 @@ namespace RimWorldAdvancedAIMod.AI
         {
             foreach (var individual in population)
             {
-                individual.Fitness = CalculateFitness(individual);  // Calculate and assign fitness
+                individual.Fitness = CalculateFitness(individual);
             }
         }
 
         private float CalculateFitness(Individual individual)
         {
-            // Fitness calculation based on the individual's performance in a simulation or a set of criteria
-            return individual.Evaluate();  // Define how an individual's fitness is evaluated
+            // Evaluate the fitness of the individual in the context of RimWorld
+            // Example: Simulate the behavior of the NPC using the individual's genes
+            // and calculate a fitness score based on the NPC's performance in the simulation
+            return individual.Evaluate();
         }
     }
 
@@ -102,7 +103,7 @@ namespace RimWorldAdvancedAIMod.AI
             // Randomize genes at initialization
             for (int i = 0; i < 10; i++)
             {
-                Genes.Add(Rand.RangeInclusive(0, 1));  // Simple binary gene for demonstration
+                Genes.Add(Rand.RangeInclusive(0, 1));
             }
         }
 
@@ -122,13 +123,15 @@ namespace RimWorldAdvancedAIMod.AI
         {
             // Mutate a gene
             int geneIndex = Rand.RangeInclusive(0, Genes.Count - 1);
-            Genes[geneIndex] = 1 - Genes[geneIndex];  // Simple flip for binary genes
+            Genes[geneIndex] = 1 - Genes[geneIndex];
         }
 
         public float Evaluate()
         {
-            // Evaluate the fitness of the individual
-            return Genes.Count(g => g == 1);  // Example: count the number of 1's as a fitness measure
+            // Evaluate the fitness of the individual in the context of RimWorld
+            // Example: Simulate the behavior of the NPC using the individual's genes
+            // and calculate a fitness score based on the NPC's performance in the simulation
+            return Genes.Count(g => g == 1);
         }
     }
 }

@@ -1,10 +1,10 @@
 using System;
-using Verse;  // Base namespace for many RimWorld game-related classes
-using RimWorld;  // Namespace for RimWorld-specific classes
+using Verse;
+using RimWorld;
 
 namespace RimWorldAdvancedAIMod.AI
 {
-    // Class to handle Bayesian Optimization for decision-making improvements
+    // Class to handle Bayesian Optimization for hyperparameter tuning
     public class BayesianOptimization
     {
         private double[] parameters;
@@ -19,41 +19,42 @@ namespace RimWorldAdvancedAIMod.AI
         // Method to perform the optimization
         public void Optimize(int iterations)
         {
-            // This is a placeholder for the optimization logic.
-            // In practice, this would interact with an actual Bayesian optimization library or custom implementation.
             for (int i = 0; i < iterations; i++)
             {
-                // Simulate parameter adjustment
                 AdjustParameters();
 
-                // Evaluate the new parameters
                 double result = objectiveFunction(parameters);
 
                 Log.Message($"Optimization iteration {i + 1}: Objective function value = {result}");
             }
         }
 
-        // Method to simulate parameter adjustment (This should be replaced with actual Bayesian logic)
+        // Method to adjust parameters using Bayesian optimization logic
         private void AdjustParameters()
         {
+            // Implement Bayesian optimization logic here
+            // Update the parameters based on the optimization algorithm
+            // For example, you can use Gaussian processes or acquisition functions
+
+            // For demonstration purposes, let's randomly adjust the parameters
             Random rnd = new Random();
             for (int i = 0; i < parameters.Length; i++)
             {
-                // Randomly adjust parameters for demonstration purposes
                 parameters[i] += (rnd.NextDouble() - 0.5) * 0.1;
             }
         }
 
-        // Example of an objective function that could be used to evaluate the effectiveness of a set of parameters
+        // Example of an objective function that could be used for hyperparameter tuning
         public static double SampleObjectiveFunction(double[] parameters)
         {
-            // This is a simple example that treats parameters as coordinates in a space, minimizing their distance to (0,0)
-            double sum = 0;
-            foreach (double param in parameters)
-            {
-                sum += param * param;
-            }
-            return Math.Sqrt(sum);
+            // This is just a placeholder objective function
+            // Replace it with your actual objective function for hyperparameter tuning
+
+            // For example, you can use cross-validation to evaluate the performance of a learning algorithm
+            // based on the given set of parameters
+
+            // Return a value that represents the performance of the learning algorithm
+            return 0;
         }
     }
 }

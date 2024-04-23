@@ -1,32 +1,32 @@
 using System;
 using System.Collections.Generic;
-using Verse;  // RimWorld's base namespace for many game-related classes
+using Verse;
 
 namespace RimWorldAdvancedAIMod.AI
 {
-    public class TabuSearch
+    public class TaskOptimizationManager
     {
         private List<int[]> tabuList;
         private int maxTabuSize;
 
-        public TabuSearch(int maxTabuSize)
+        public TaskOptimizationManager(int maxTabuSize)
         {
             this.maxTabuSize = maxTabuSize;
             this.tabuList = new List<int[]>();
         }
 
-        // Method to perform the Tabu Search
-        public int[] PerformSearch(Func<int[], int> objectiveFunction, int[] initialSolution)
+        // Method to perform task optimization using Tabu Search
+        public int[] OptimizeTasks(Func<int[], int> objectiveFunction, int[] initialAssignment)
         {
-            int[] bestSolution = initialSolution;
-            int bestCost = objectiveFunction(initialSolution);
+            int[] bestAssignment = initialAssignment;
+            int bestCost = objectiveFunction(initialAssignment);
 
-            int[] currentSolution = initialSolution;
+            int[] currentAssignment = initialAssignment;
             int currentCost = bestCost;
 
             while (!ShouldTerminate())
             {
-                List<int[]> neighborhood = GenerateNeighborhood(currentSolution);
+                List<int[]> neighborhood = GenerateAssignmentNeighborhood(currentAssignment);
 
                 int[] bestCandidate = null;
                 int bestCandidateCost = int.MaxValue;
@@ -42,61 +42,61 @@ namespace RimWorldAdvancedAIMod.AI
 
                 if (bestCandidate != null)
                 {
-                    currentSolution = bestCandidate;
+                    currentAssignment = bestCandidate;
                     currentCost = bestCandidateCost;
 
                     if (currentCost < bestCost)
                     {
-                        bestSolution = currentSolution;
+                        bestAssignment = currentAssignment;
                         bestCost = currentCost;
                     }
 
-                    UpdateTabuList(currentSolution);
+                    UpdateTabuList(currentAssignment);
                 }
             }
 
-            return bestSolution;
+            return bestAssignment;
         }
 
-        // Generates a neighborhood of solutions around the current solution
-        private List<int[]> GenerateNeighborhood(int[] currentSolution)
+        // Generates a neighborhood of task assignments around the current assignment
+        private List<int[]> GenerateAssignmentNeighborhood(int[] currentAssignment)
         {
-            // Placeholder for generating a neighborhood
+            // Placeholder for generating a task assignment neighborhood
             return new List<int[]>();
         }
 
-        // Checks if a solution is in the tabu list
+        // Checks if a task assignment is in the tabu list
         private bool IsTabu(int[] candidate)
         {
             // Check for equivalence in the tabu list
             return tabuList.Exists(item => AreEquivalent(item, candidate));
         }
 
-        // Adds a new solution to the tabu list
-        private void UpdateTabuList(int[] solution)
+        // Adds a new task assignment to the tabu list
+        private void UpdateTabuList(int[] assignment)
         {
-            tabuList.Add(solution);
+            tabuList.Add(assignment);
             if (tabuList.Count > maxTabuSize)
             {
-                tabuList.RemoveAt(0);  // Remove the oldest solution if over the limit
+                tabuList.RemoveAt(0);  // Remove the oldest assignment if over the limit
             }
         }
 
-        // Helper method to determine if two solutions are equivalent
-        private bool AreEquivalent(int[] solution1, int[] solution2)
+        // Helper method to determine if two task assignments are equivalent
+        private bool AreEquivalent(int[] assignment1, int[] assignment2)
         {
-            for (int i = 0; i < solution1.Length; i++)
+            for (int i = 0; i < assignment1.Length; i++)
             {
-                if (solution1[i] != solution2[i])
+                if (assignment1[i] != assignment2[i])
                     return false;
             }
             return true;
         }
 
-        // Condition to terminate the search
+        // Condition to terminate the task optimization
         private bool ShouldTerminate()
         {
-            // Placeholder for termination condition
+            // Placeholder for termination condition specific to task optimization
             return false;
         }
     }

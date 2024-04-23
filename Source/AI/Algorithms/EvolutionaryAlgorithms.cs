@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Verse;  // RimWorld's base namespace for many game-related classes
-using RimWorld;  // Namespace for RimWorld-specific classes
+using Verse;
+using RimWorld;
 
 namespace RimWorldAdvancedAIMod.AI.Algorithms
 {
@@ -12,17 +12,19 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
         private float mutationRate;
         private float crossoverRate;
         private int elitismCount;
-        
+        private List<Action> additionalAlgorithms = new List<Action>();
+
         public EvolutionaryAlgorithm(int populationSize, float mutationRate, float crossoverRate, int elitismCount)
         {
             this.populationSize = populationSize;
             this.mutationRate = mutationRate;
             this.crossoverRate = crossoverRate;
             this.elitismCount = elitismCount;
+
             InitializePopulation();
+            InitializeAdditionalAlgorithms();
         }
 
-        // Initialize the population with random individuals
         private void InitializePopulation()
         {
             for (int i = 0; i < populationSize; i++)
@@ -31,17 +33,21 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
             }
         }
 
-        // Run the algorithm for a given number of generations
+        private void InitializeAdditionalAlgorithms()
+        {
+            // Placeholder: Initialize additional algorithms here
+            additionalAlgorithms.Add(Algorithm1);
+            additionalAlgorithms.Add(Algorithm2);
+            additionalAlgorithms.Add(Algorithm3);
+        }
+
         public void Run(int generations)
         {
             for (int i = 0; i < generations; i++)
             {
-                List<Individual> newPopulation = new List<Individual>();
+                List<Individual> newPopulation = PerformElitism();
 
-                // Perform elitism
-                newPopulation.AddRange(GetElites());
-
-                // Generate new individuals with crossover and mutation
+                // Crossover and mutation to form new population
                 while (newPopulation.Count < populationSize)
                 {
                     Individual parent1 = SelectParent();
@@ -52,39 +58,47 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
                 }
 
                 population = newPopulation;
-                // Optionally log the progress or results
+                ExecuteAdditionalAlgorithms();
                 Log.Message($"Generation {i + 1} completed.");
             }
         }
 
-        // Perform elitism, preserving the best performing individuals
-        private List<Individual> GetElites()
+        private List<Individual> PerformElitism()
         {
             population.Sort((x, y) => x.Fitness.CompareTo(y.Fitness));
             return population.GetRange(0, elitismCount);
         }
 
-        // Selection mechanism for choosing individuals for crossover
         private Individual SelectParent()
         {
-            // Implement a selection method, e.g., tournament selection
+            // Simple random selection, consider implementing a more robust method like tournament selection
             return population.RandomElement();
         }
 
-        // Crossover mechanism to produce a new individual
         private Individual Crossover(Individual parent1, Individual parent2)
         {
-            // Implement crossover logic here
-            return new Individual(); // Placeholder
+            // Placeholder for crossover logic
+            return new Individual(); // Assume simple one-point crossover
         }
 
-        // Mutation mechanism to introduce variability
         private void Mutate(Individual individual)
         {
-            // Implement mutation logic here
+            // Placeholder for mutation logic
         }
 
-        // An inner class to represent an individual in the population
+        private void ExecuteAdditionalAlgorithms()
+        {
+            foreach (var algorithm in additionalAlgorithms)
+            {
+                algorithm.Invoke();
+            }
+        }
+
+        // Example placeholder methods for additional algorithms
+        private void Algorithm1() { /* Placeholder logic */ }
+        private void Algorithm2() { /* Placeholder logic */ }
+        private void Algorithm3() { /* Placeholder logic */ }
+
         private class Individual
         {
             public float Fitness { get; set; }

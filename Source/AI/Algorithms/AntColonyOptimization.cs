@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Verse;  // RimWorld's base namespace for many game-related classes
+using Verse;
 
 namespace RimWorldAdvancedAIMod.AI
 {
-    public class AntColonyOptimization
+    public class StrategicPlacementManager
     {
         private int colonySize;
         private double alpha; // Pheromone importance
@@ -12,10 +12,10 @@ namespace RimWorldAdvancedAIMod.AI
         private double evaporationRate;
         private double initialPheromone;
         private Map map;
-        private List<Path> bestPaths;
+        private List<Placement> bestPlacements;
 
-        public AntColonyOptimization(Map gameMap, int size = 50, double alpha = 1.0, double beta = 2.0, 
-                                     double evaporation = 0.5, double initialPheromone = 0.1)
+        public StrategicPlacementManager(Map gameMap, int size = 50, double alpha = 1.0, double beta = 2.0,
+                                         double evaporation = 0.5, double initialPheromone = 0.1)
         {
             this.map = gameMap;
             this.colonySize = size;
@@ -23,32 +23,31 @@ namespace RimWorldAdvancedAIMod.AI
             this.beta = beta;
             this.evaporationRate = evaporation;
             this.initialPheromone = initialPheromone;
-            this.bestPaths = new List<Path>();
+            this.bestPlacements = new List<Placement>();
         }
 
-        public void InitializeColony()
+        public void InitializePlacement()
         {
-            // Initialize pheromones on all paths and heuristic values
-            // This can depend heavily on what you define as a 'path' and could be adapted for zones, resources, etc.
-            Log.Message("Initializing ant colony optimization algorithm.");
+            // Initialize pheromones and heuristic values for placement algorithm
+            Log.Message("Initializing strategic placement algorithm.");
         }
 
         public void RunOptimization()
         {
             for (int i = 0; i < colonySize; i++)
             {
-                Ant ant = new Ant(map);
-                ant.FindPath(); // Each ant finds one path based on pheromone levels
-                UpdatePheromones(ant);
+                PlacementAgent agent = new PlacementAgent(map);
+                agent.PlaceObject(); // Each agent places one object based on pheromone levels
+                UpdatePheromones(agent);
             }
             EvaporatePheromones();
-            Log.Message("Ant colony optimization cycle complete.");
+            Log.Message("Strategic placement algorithm complete.");
         }
 
-        private void UpdatePheromones(Ant ant)
+        private void UpdatePheromones(PlacementAgent agent)
         {
-            // Update pheromones along the path found by the ant
-            // This could involve increasing pheromone levels on paths taken by the ant
+            // Update pheromones based on the placement made by the agent
+            // This could involve increasing pheromone levels on the placed object's position
         }
 
         private void EvaporatePheromones()
@@ -56,35 +55,35 @@ namespace RimWorldAdvancedAIMod.AI
             // Reduce all pheromone levels to simulate evaporation
         }
 
-        public void DisplayBestPaths()
+        public void DisplayBestPlacements()
         {
-            foreach (var path in bestPaths)
+            foreach (var placement in bestPlacements)
             {
-                Log.Message($"Path cost: {path.Cost}, Path length: {path.Length}");
+                Log.Message($"Object placed at: {placement.Position}, Orientation: {placement.Orientation}");
                 // Additional details can be displayed or used in game mechanics
             }
         }
     }
 
     // Placeholder classes to simulate functionality
-    public class Ant
+    public class PlacementAgent
     {
         private Map map;
 
-        public Ant(Map map)
+        public PlacementAgent(Map map)
         {
             this.map = map;
         }
 
-        public void FindPath()
+        public void PlaceObject()
         {
-            // Implement pathfinding logic here, using pheromones and heuristic information
+            // Implement placement logic here, using pheromones and heuristic information
         }
     }
 
-    public class Path
+    public class Placement
     {
-        public double Cost { get; set; }
-        public int Length { get; set; }
+        public IntVec3 Position { get; set; }
+        public float Orientation { get; set; }
     }
 }

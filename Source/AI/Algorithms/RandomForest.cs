@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Verse;  // RimWorld's base namespace for many game-related classes
-using RimWorld;  // Namespace for RimWorld-specific classes
+using Verse;
+using RimWorld;
 
 namespace RimWorldAdvancedAIMod.AI
 {
@@ -29,14 +29,14 @@ namespace RimWorldAdvancedAIMod.AI
         }
 
         // Method to predict the outcome by aggregating decisions from all trees
-        public void MakePrediction(Pawn pawn)
+        public void MakePrediction(Pawn pawn, Dictionary<string, float> environment)
         {
             int voteToAct = 0;
             int voteToWait = 0;
 
             foreach (var tree in forest)
             {
-                if (tree.Decide(pawn))
+                if (tree.Decide(pawn, environment))
                 {
                     voteToAct++;
                 }
@@ -74,7 +74,7 @@ namespace RimWorldAdvancedAIMod.AI
         private class DecisionTree
         {
             // Simulated decision logic for demonstration
-            public bool Decide(Pawn pawn)
+            public bool Decide(Pawn pawn, Dictionary<string, float> environment)
             {
                 // Placeholder for decision logic, here we just simulate a random decision
                 return Rand.Value > 0.5;

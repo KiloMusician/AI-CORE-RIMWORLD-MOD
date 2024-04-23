@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Verse;  // Base namespace for many game-related classes in RimWorld
-using UnityEngine;  // Necessary for mathematical computations and vector handling
+using UnityEngine;
 
 namespace RimWorldAdvancedAIMod.AI
 {
@@ -29,9 +28,15 @@ namespace RimWorldAdvancedAIMod.AI
         {
             for (int i = 0; i < populationSize; i++)
             {
-                Vector3 position = new Vector3(Rand.Value, Rand.Value, Rand.Value); // Random positions in a hypothetical 3D space
+                Vector3 position = GenerateRandomPosition(); // Random positions in a hypothetical 3D space
                 fireflies.Add(new Firefly(position));
             }
+        }
+
+        // Generate a random position in a hypothetical 3D space
+        private Vector3 GenerateRandomPosition()
+        {
+            return new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
         }
 
         // Main method to run the algorithm
@@ -48,7 +53,6 @@ namespace RimWorldAdvancedAIMod.AI
                 }
             }
 
-            // Optional: Log current best solution or positions of fireflies
             LogBestSolution();
         }
 
@@ -57,12 +61,18 @@ namespace RimWorldAdvancedAIMod.AI
         {
             Vector3 direction = otherFirefly.Position - firefly.Position;
             float distance = direction.magnitude;
-            float lightIntensity = Mathf.Exp(-absorptionCoefficient * Mathf.Pow(distance, 2));
+            float lightIntensity = CalculateLightIntensity(distance);
 
-            firefly.Position += attractionCoefficient * lightIntensity * direction + randomizationParameter * (Rand.Value - 0.5f) * Vector3.one;
+            firefly.Position += attractionCoefficient * lightIntensity * direction + randomizationParameter * (UnityEngine.Random.value - 0.5f) * Vector3.one;
         }
 
-        // Log or visualize the best solution
+        // Calculate light intensity based on distance
+        private float CalculateLightIntensity(float distance)
+        {
+            return Mathf.Exp(-absorptionCoefficient * Mathf.Pow(distance, 2));
+        }
+
+        // Log the best solution
         private void LogBestSolution()
         {
             Firefly best = fireflies[0];
@@ -74,14 +84,14 @@ namespace RimWorldAdvancedAIMod.AI
                 }
             }
 
-            Log.Message($"Best firefly position: {best.Position} with intensity: {best.Intensity}");
+            Debug.Log($"Best firefly position: {best.Position} with intensity: {best.Intensity}");
         }
 
         // Represents an individual firefly
         private class Firefly
         {
             public Vector3 Position;
-            public float Intensity;  // Could be determined by the problem context
+            public float Intensity;
 
             public Firefly(Vector3 position)
             {
@@ -89,10 +99,9 @@ namespace RimWorldAdvancedAIMod.AI
                 Intensity = CalculateIntensity(position);
             }
 
-            // Method to calculate intensity based on position
+            // Calculate intensity based on position
             private float CalculateIntensity(Vector3 position)
             {
-                // Hypothetical intensity function based on the position
                 return Mathf.Max(1.0f - position.magnitude, 0);
             }
         }

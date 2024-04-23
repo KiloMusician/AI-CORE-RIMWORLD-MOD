@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Verse;  // RimWorld's base namespace for many game-related classes
-using RimWorld;  // Namespace for RimWorld-specific classes
+using System.Threading.Tasks;
+using System.Buffers;
+using System.Threading;
 
 namespace RimWorldAdvancedAIMod.AI.Algorithms
 {
@@ -15,7 +16,7 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
         public ParticleSwarmOptimization(int numberOfParticles, int dimension)
         {
             this.dimension = dimension;
-            globalBestPosition = new double[dimension];
+            globalBestPosition = ArrayPool<double>.Shared.Rent(dimension);
             globalBestScore = double.MaxValue;
 
             InitializeParticles(numberOfParticles);
@@ -38,22 +39,20 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
 
         public void Optimize()
         {
-            foreach (Particle particle in particles)
+            Parallel.ForEach(particles, particle =>
             {
                 particle.UpdateVelocity(globalBestPosition);
                 particle.UpdatePosition();
 
-                // Evaluate the new position
                 double score = EvaluatePosition(particle.Position);
                 particle.UpdatePersonalBest(score);
 
-                // Update global best if necessary
                 if (score < globalBestScore)
                 {
                     globalBestScore = score;
                     Array.Copy(particle.Position, globalBestPosition, dimension);
                 }
-            }
+            });
         }
 
         private double EvaluatePosition(double[] position)
@@ -71,6 +70,11 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
             }
         }
 
+        ~ParticleSwarmOptimization()
+        {
+            ArrayPool<double>.Shared.Return(globalBestPosition);
+        }
+
         private class Particle
         {
             public double[] Position { get; private set; }
@@ -78,13 +82,13 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
             public double[] BestPosition { get; private set; }
             public double BestScore { get; private set; }
 
-            private static readonly Random rnd = new Random();
+            private static readonly Lazy<Random> rnd = new Lazy<Random>(() => new Random(), LazyThreadSafetyMode.ExecutionAndPublication);
 
             public Particle(int dimension)
             {
-                Position = new double[dimension];
-                Velocity = new double[dimension];
-                BestPosition = new double[dimension];
+                Position = ArrayPool<double>.Shared.Rent(dimension);
+                Velocity = ArrayPool<double>.Shared.Rent(dimension);
+                BestPosition = ArrayPool<double>.Shared.Rent(dimension);
                 BestScore = double.MaxValue;
 
                 InitializeRandomly(dimension);
@@ -94,8 +98,8 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
             {
                 for (int i = 0; i < dimension; i++)
                 {
-                    Position[i] = rnd.NextDouble() * 100;
-                    Velocity[i] = rnd.NextDouble() * 10;
+                    Position[i] = rnd.Value.NextDouble() * 100;
+                    Velocity[i] = rnd.Value.NextDouble() * 10;
                 }
                 BestScore = EvaluatePosition(Position);
                 Array.Copy(Position, BestPosition, dimension);
@@ -105,8 +109,8 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
             {
                 for (int i = 0; i < Position.Length; i++)
                 {
-                    double cognitiveComponent = 2.0 * rnd.NextDouble() * (BestPosition[i] - Position[i]);
-                    double socialComponent = 2.0 * rnd.NextDouble() * (globalBestPosition[i] - Position[i]);
+                    double cognitiveComponent = 2.0 * rnd.Value.NextDouble() * (BestPosition[i] - Position[i]);
+                    double socialComponent = 2.0 * rnd.Value.NextDouble() * (globalBestPosition[i] - Position[i]);
                     Velocity[i] = 0.729 * (Velocity[i] + cognitiveComponent + socialComponent);
                 }
             }
@@ -126,6 +130,13 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
                     BestScore = score;
                     Array.Copy(Position, BestPosition, Position.Length);
                 }
+            }
+
+            ~Particle()
+            {
+                ArrayPool<double>.Shared.Return(Position);
+                ArrayPool<double>.Shared.Return(Velocity);
+                ArrayPool<double>.Shared.Return(BestPosition);
             }
         }
     }

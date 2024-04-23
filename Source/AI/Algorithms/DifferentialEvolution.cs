@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Verse; // RimWorld's base namespace for many game-related classes
+using Verse;
 
 namespace RimWorldAdvancedAIMod.AI.Algorithms
 {
@@ -26,7 +26,7 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
             population = new List<double[]>();
             for (int i = 0; i < populationSize; i++)
             {
-                double[] individual = new double[3]; // Example: three parameters to optimize
+                double[] individual = new double[3]; // Example: three health-related parameters to optimize
                 for (int j = 0; j < individual.Length; j++)
                 {
                     individual[j] = random.NextDouble(); // Random initialization
@@ -68,8 +68,8 @@ namespace RimWorldAdvancedAIMod.AI.Algorithms
 
         private double Evaluate(double[] individual)
         {
-            // A mock evaluation function that should be adapted to evaluate the fitness of an individual
-            // This could involve evaluating how well an NPC performs a task or manages resources
+            // Evaluate the fitness of an individual based on health-related parameters
+            // This could involve evaluating the effectiveness of a treatment or the severity of a health condition
             double score = 0;
             foreach (var value in individual)
             {
