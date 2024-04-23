@@ -23,5 +23,6 @@
             "editor.defaultFormatter": "ms-vscode.PowerShell"
         },
         "powershell.powerShellExePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
-    }
+    },
+    "deepscan.enable": true
 }
