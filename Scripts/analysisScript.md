@@ -1,4 +1,10 @@
-$projectRoot = "C:\RIMWORLD_MODDING\AI-CORE-RIMWORLD-MOD"
+Script to Run Analysis
+This script utilizes the provided static analysis tool to check the RimWorld mod for issues.
+
+# Run Analysis Script
+
+# Define the paths for the project and static analysis tool
+$projectRoot = "C:\RimWorld_MODDING\AI-CORE-RIMWORLD-MOD"
 $toolsDir = "$projectRoot\Tools"
 $toolPath = "$toolsDir\StaticAnalysisTool.exe"
 $logPath = "$projectRoot\Logs\analysis_results.log"
@@ -18,17 +24,38 @@ if (-Not (Test-Path $toolPath)) {
 # Prepare arguments for running the static analysis tool with detailed output
 $arguments = "--input `"$projectRoot\Source`" --output `"$logPath`" --format detailed"
 
+# Configure ProcessStartInfo for external process execution
+$processInfo = New-Object System.Diagnostics.ProcessStartInfo
+$processInfo.FileName = $toolPath
+$processInfo.Arguments = $arguments
+$processInfo.RedirectStandardOutput = $true
+$processInfo.RedirectStandardError = $true
+$processInfo.UseShellExecute = $false
+$processInfo.CreateNoWindow = $true
+
 # Execute the static analysis tool
+$process = New-Object System.Diagnostics.Process
+$process.StartInfo = $processInfo
+
 try {
+    $process.Start() | Out-Null
     "Running static analysis on the project..." | Out-File $logPath -Append
-    & $toolPath $arguments | Out-File $logPath -Append
-    if ($LASTEXITCODE -eq 0) {
+    $process.WaitForExit()
+
+    $output = $process.StandardOutput.ReadToEnd()
+    $errorOutput = $process.StandardError.ReadToEnd()
+
+    if ($process.ExitCode -eq 0 -and $output) {
         "Static analysis completed successfully." | Out-File $logPath -Append
+        $output | Out-File $logPath -Append
     } else {
-        Throw "Static analysis tool exited with code $LAST_EXIT_CODE"
+        "Static analysis reported errors:" | Out-File $logPath -Append
+        $errorOutput | Out-File $logPath -Append
     }
 } catch {
-    "An error occurred during static analysis: $($_.Exception.Message)" | Out-File $logPath -Append
+    $errorMsg = "An error occurred during static analysis: $($_.Exception.Message)"
+    $errorMsg | Out-File $logPath -Append
+    Write-Host $errorMsg -ForegroundColor Red
 }
 
 # Check for results and provide detailed logging
@@ -45,4 +72,8 @@ if (Test-Path $logPath) {
 }
 
 # Optionally open the log file in the default text editor for review
-Start-Process "notepad.exe" $logPath
+if (Test-Path "notepad.exe") {
+    Start-Process "notepad.exe" $logPath
+} else {
+    "Error: notepad.exe not found. Unable to open log file." | Out-File $logPath -Append
+}

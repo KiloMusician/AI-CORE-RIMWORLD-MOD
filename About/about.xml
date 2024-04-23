@@ -1,7 +1,28 @@
-# Existing code...
+<?xml version="1.0" encoding="UTF-8"?>
+<ModMetaData>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ModMetaData SYSTEM "https://example.com/modmetadata.dtd">
+<ModMetaData>
+    <!-- The name of the mod as it will appear in the mods list -->
+    <name>AI Enhanced Gameplay Mod for RimWorld</name>
 
-# BEGIN: ed8c6549bwf9
-# Add missing code here
-# END: ed8c6549bwf9
+    <!-- The author or authors of the mod -->
+    <author>Your Name or Team</author>
 
-# Existing code...
+    <!-- The URL to the mod's website or repository (optional) -->
+    <url>http://github.com/yourusername/AIEnhancedGameplayMod</url>
+
+    <!-- A brief description of what the mod does -->
+    <description>
+        The AI Enhanced Gameplay Mod integrates advanced artificial intelligence and machine learning to transform RimWorld's gameplay. Key features include AI Core Integration for smarter NPC behavior, Performance Optimization Systems, Procedural Event Generation, and an Adaptive Quest System. NPCs learn from experiences and show emotional intelligence, enhancing social and ethical dynamics within the game. Prepare for a deeply enriched RimWorld experience with nuanced AI interactions, enhanced health systems, and comprehensive debugging tools.
+    </description>
+
+    <!-- Mod version -->
+    <targetVersion>1.0</targetVersion>
+
+    <!-- Supported game version -->
+    <supportedVersions>
+        <li>1.2</li>
+        <li>1.3</li>
+    </supportedVersions>
+</ModMetaData>
