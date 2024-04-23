@@ -24,5 +24,17 @@
         },
         "powershell.powerShellExePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
     },
-    "deepscan.enable": true
+    "deepscan.enable": true,
+    "cSpell.words": [
+        "dylib",
+        "Gameplay",
+        "Hediffs",
+        "modders",
+        "netstandard",
+        "Remoting",
+        "RIMWORLD",
+        "rimworldaienhanced",
+        "Serilog",
+        "Wigets"
+    ]
 }

@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using RimWorldAIEnhanced.Source.AI;
+using RimWorldAIEnhanced.Source.AI.LearningModule; // Moved here
 
 namespace RimWorldAIEnhanced.Tests.UnitTests
 {
@@ -20,9 +21,6 @@ namespace RimWorldAIEnhanced.Tests.UnitTests
         [Test]
         public void TestLearningModuleAdaptation()
         {
-            // Add missing import statement for LearningModule
-            using RimWorldAIEnhanced.Source.AI.LearningModule;
-
             LearningModule learningModule = new LearningModule();
             learningModule.LearnFromInteraction("Learning Test");
             

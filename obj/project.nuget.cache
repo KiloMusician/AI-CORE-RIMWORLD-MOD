@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HACR8BHck7F9C9CFiGHvLkvtUxD7kctH5j+3LpdbnwPe0t7ZRbPrk4dEOKI77dQdcUR+DveF7Zkg7X8WugEMAw==",
+  "dgSpecHash": "SYu4tKsBawfciKAXcG3I5zWKkb6T1Qi1Z52/mGxBvni6ZQI+Wy8VoXSbzaCUcRh52f5CAOybwW7+OgvOj0kMfg==",
   "success": true,
-  "projectFilePath": "C:\\RIMWORLD MODDING\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj",
+  "projectFilePath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jacob\\.nuget\\packages\\harmonyx\\2.12.0\\harmonyx.2.12.0.nupkg.sha512",
     "C:\\Users\\jacob\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

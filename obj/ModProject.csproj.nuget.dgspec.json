@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\RIMWORLD MODDING\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj": {}
+    "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj": {}
   },
   "projects": {
-    "C:\\RIMWORLD MODDING\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj": {
+    "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\RIMWORLD MODDING\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj",
+        "projectUniqueName": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj",
         "projectName": "ModProject",
-        "projectPath": "C:\\RIMWORLD MODDING\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj",
+        "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj",
         "packagesPath": "C:\\Users\\jacob\\.nuget\\packages\\",
-        "outputPath": "C:\\RIMWORLD MODDING\\AI-CORE-RIMWORLD-MOD\\obj\\",
+        "outputPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AI-CORE-RIMWORLD-MOD\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jacob\\AppData\\Roaming\\NuGet\\NuGet.Config"

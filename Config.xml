@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <!-- General Application Settings -->
+    <AppSettings>
+        <Version>1.0</Version>
+        <CompanyName>Example Company</CompanyName>
+        <ApplicationName>Example Application</ApplicationName>
+    </AppSettings>
+
+    <!-- User Preferences -->
+    <UserPreferences>
+        <Language>English</Language>
+        <Theme>Dark</Theme>
+        <Notifications Enabled="true"/>
+    </UserPreferences>
+
+    <!-- Path Settings -->
+    <Paths>
+        <InstallPath>C:\Program Files\ExampleApp</InstallPath>
+        <DataPath>C:\Program Files\ExampleApp\Data</DataPath>
+        <TempPath>C:\Program Files\ExampleApp\Temp</TempPath>
+    </Paths>
+
+    <!-- Module Configurations -->
+    <Modules>
+        <Module>
+            <Name>LoggingModule</Name>
+            <Enabled>true</Enabled>
+            <Level>Verbose</Level>
+        </Module>
+        <Module>
+            <Name>UpdateChecker</Name>
+            <Enabled>true</Enabled>
+            <CheckFrequency>Weekly</CheckFrequency>
+        </Module>
+        <Module>
+            <Name>BackupManager</Name>
+            <Enabled>false</Enabled>
+            <BackupPath>D:\Backups</BackupPath>
+            <Schedule>02:00</Schedule>
+        </Module>
+    </Modules>
+
+    <!-- Database Configuration -->
+    <Database>
+        <Type>SQLServer</Type>
+        <ConnectionString>Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;</ConnectionString>
+    </Database>
+
+    <!-- External Tools -->
+    <ExternalTools>
+        <Tool>
+            <Name>StaticAnalysisTool</Name>
+            <Path>C:\Tools\StaticAnalysisTool.exe</Path>
+            <Arguments>/analyze /path:C:\MyProjects\Project1</Arguments>
+        </Tool>
+    </ExternalTools>
+
+    <!-- Advanced Settings -->
+    <AdvancedSettings>
+        <Logging>
+            <FileLogPath>C:\Logs\AppLog.txt</FileLogPath>
+            <LogLevel>Debug</LogLevel>
+        </Logging>
+        <Performance>
+            <MaxThreads>8</MaxThreads>
+        </Performance>
+    </AdvancedSettings>
+</Configuration>
