@@ -3,7 +3,7 @@ using RimWorld;
 using System.Reflection;
 using static RimWorld.NeedDefOf; // Correct placement for using static
 
-namespace RimWorldAIEnhanced.Patches.Postfixes
+namespace AI_CORE_RIMWORLD_MOD.Patches.Postfixes
 {
     [HarmonyPatch(typeof(Pawn_NeedsTracker))]
     [HarmonyPatch("ShouldHaveNeed")]

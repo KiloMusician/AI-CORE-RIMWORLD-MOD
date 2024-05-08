@@ -2,7 +2,7 @@ using HarmonyLib;
 using System.Reflection;
 using Verse;  // This using directive ensures access to RimWorld and Verse specific classes and attributes like StaticConstructorOnStartup.
 
-namespace RimWorldAIEnhanced.Patches
+namespace AI_CORE_RIMWORLD_MOD.Patches
 {
     [StaticConstructorOnStartup]
     public static class HarmonyPatches

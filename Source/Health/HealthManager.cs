@@ -2,7 +2,7 @@ using System;
 using Verse;  // Assuming use of RimWorld's Verse namespace for game entities
 using RimWorldAIEnhanced.Source.Treatment; // Import the Treatment namespace
 
-namespace RimWorldAIEnhanced.Source.Health
+namespace Source.Health
 {
     public class HealthManager
     {

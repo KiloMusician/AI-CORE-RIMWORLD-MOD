@@ -1,0 +1,32 @@
+    <ModMetaData>
+        <name>AI Enhanced Gameplay Mod for RimWorld</name>
+        <author>Kilo.Musician</author>
+    </ModMetaData>
+    <link>http://github.com/KiloMusician/AIEnhancedGameplayMod</link>
+    <description>
+        Transform your RimWorld experience with the AI Enhanced Gameplay Mod, where advanced artificial intelligence breathes new life into every aspect of the game. This mod not only enhances NPC behavior but also deepens the interaction layers and strategic elements, providing a richer, more immersive gameplay experience. Key enhancements include:
+        - Memory Dynamics: Colonists develop memories based on events and interactions, which affect their behavior and abilities.
+        - Deep Emotional Layers: Enhanced emotional depth that allows for more complex colonist interactions and story development.
+        - Evolving Gameplay: As memories accumulate or fade, colonists’ skills and relationships undergo changes, reflecting their personal growth and traumas.
+        - **AI Core Integration**: Elevates NPC decision-making processes, making their actions more realistic and interactions more impactful.
+        - **Performance Optimization Systems**: Implements advanced algorithms to optimize game performance, ensuring smoother gameplay.
+        - **Procedural Event Generation**: Introduces dynamic events that adapt to game context and player actions, enriching the narrative landscape.
+        - **Adaptive Quest System**: Quests evolve based on player choices and NPC interactions, offering tailored challenges and rewards.
+        - **Emotional Intelligence in NPCs**: NPCs now display complex emotional responses, fostering deeper relationships and dynamic social hierarchies.
+        - **Enhanced Social and Ethical Dynamics**: Improves the depth of social interactions with nuanced moral decisions that influence NPC behavior and game outcomes.
+        - **Nuanced AI Interactions**: NPCs engage in meaningful conversations, reflecting their personalities and histories, rather than simple notifications of interactions.
+        - **Enhanced Health Systems**: Overhauls health management with a comprehensive approach to diagnostics and treatments.
+        - **Comprehensive Debugging Tools**: Provides extensive tools for adjusting game mechanics and troubleshooting, enhancing both modder and player engagement.
+        - **Autonomous Colonist Agency**: Colonists autonomously build and organize their living spaces based on user-defined zones, optimizing their environment for factors like defense, aesthetics, and function. Users can specify zones for specific building types, such as initial rooms, storage, workspaces, and specialized rooms like kitchens and workshops, which evolve as research advances.
+        - **Conversational AI**: NPCs can now engage in actual conversations with each other, discussing topics, exchanging jokes, or even arguing, based on their individual traits and relationships, making each interaction unique and memorable.
+        - **AI God Core Device**: This interactive device allows NPCs to communicate directly with the player, suggesting gameplay improvements and procedural optimizations through a virtual testing chamber.
+        - **Machine Learning Evolution**: Empowers NPCs with the capability to learn from their experiences, evolve over time, and potentially achieve sentience, revolutionizing their interactions and autonomy.
+
+        Dive into a version of RimWorld that is alive with intelligent, learning entities that shape their world and stories in profound ways.
+    </description>
+    <targetVersion>1.0</targetVersion>
+    <supportedVersions>
+        <li>1.2</li>
+        <li>1.3</li>
+    </supportedVersions>
+</ModMetaData>

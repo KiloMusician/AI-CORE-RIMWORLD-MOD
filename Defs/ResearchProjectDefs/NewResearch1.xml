@@ -1,0 +1,29 @@
+<!-- ResearchProjects.xml -->
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <ResearchProjectDef>
+        <defName>AIIntegrationBasics</defName>
+        <label>AI Integration Basics</label>
+        <description>Unlocks the basic capabilities required to integrate advanced AI systems into your colony's infrastructure.</description>
+        <baseCost>700</baseCost>
+        <techLevel>Industrial</techLevel>
+        <prerequisites>
+            <li>MicroelectronicsBasics</li>
+        </prerequisites>
+        <researchViewX>2</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef>
+        <defName>AdvancedAISystems</defName>
+        <label>Advanced AI Systems</label>
+        <description>This research unlocks advanced AI systems that optimize your colony's efficiency and safety protocols.</description>
+        <baseCost>1400</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>AIIntegrationBasics</li>
+        </prerequisites>
+        <researchViewX>3</researchViewX>
+        <researchViewY>0</researchViewY>
+    </ResearchProjectDef>
+</Defs>

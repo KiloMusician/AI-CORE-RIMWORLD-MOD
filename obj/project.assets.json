@@ -332,7 +332,7 @@
           }
         }
       },
-      "NLog/4.7.10": {
+      "NLog/5.3.2": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/NLog.dll": {
@@ -1135,36 +1135,27 @@
         "packageIcon.png"
       ]
     },
-    "NLog/4.7.10": {
-      "sha512": "rcegW7kYOCjl7wX0SzsqpPBqnJ51JKi1WkYb6QBVX0Wc5IgH19Pv4t/co+T0s06OS0Ne44xgkY/mHg0PdrmJow==",
+    "NLog/5.3.2": {
+      "sha512": "cQRQZuDMjSyMe9EQBnI9v55YAMMz8GAfFd6fFJ6tc/kXnG7Hze8p1I8MgvWSBG6E36wA8vSxRrlm8uSIG+SENg==",
       "type": "package",
-      "path": "nlog/4.7.10",
+      "path": "nlog/5.3.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/monoandroid44/NLog.dll",
-        "lib/monoandroid44/NLog.xml",
+        "N.png",
         "lib/net35/NLog.dll",
         "lib/net35/NLog.xml",
-        "lib/net40-client/NLog.dll",
-        "lib/net40-client/NLog.xml",
         "lib/net45/NLog.dll",
         "lib/net45/NLog.xml",
+        "lib/net46/NLog.dll",
+        "lib/net46/NLog.xml",
         "lib/netstandard1.3/NLog.dll",
         "lib/netstandard1.3/NLog.xml",
         "lib/netstandard1.5/NLog.dll",
         "lib/netstandard1.5/NLog.xml",
         "lib/netstandard2.0/NLog.dll",
         "lib/netstandard2.0/NLog.xml",
-        "lib/sl4/NLog.dll",
-        "lib/sl4/NLog.xml",
-        "lib/sl5/NLog.dll",
-        "lib/sl5/NLog.xml",
-        "lib/wp8/NLog.dll",
-        "lib/wp8/NLog.xml",
-        "lib/xamarinios10/NLog.dll",
-        "lib/xamarinios10/NLog.xml",
-        "nlog.4.7.10.nupkg.sha512",
+        "nlog.5.3.2.nupkg.sha512",
         "nlog.nuspec"
       ]
     },
@@ -1647,7 +1638,7 @@
       "Microsoft.CSharp >= 4.7.0",
       "Microsoft.ML >= 1.5.5",
       "NETStandard.Library >= 2.0.3",
-      "NLog >= 4.7.10",
+      "NLog >= 5.3.2",
       "Newtonsoft.Json >= 13.0.1",
       "Serilog >= 2.10.0",
       "System.Collections.Immutable >= 5.0.0",
@@ -1716,7 +1707,7 @@
           },
           "NLog": {
             "target": "Package",
-            "version": "[4.7.10, )"
+            "version": "[5.3.2, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",

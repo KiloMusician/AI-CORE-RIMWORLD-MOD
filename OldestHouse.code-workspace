@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../RimworldModdingFiles"
+		},
+		{
+			"path": "../../RimWorldWin64_Data/Managed"
+		},
+		{
+			"path": "../AI-CORE-RIMWORLD-MOD"
+		}
+	],
+	"settings": {
+		"deepscan.enable": true,
+		"cSpell.words": [
+			"Omni"
+		],
+		"terminal.integrated.experimentalInlineChat": true
+	}
+}

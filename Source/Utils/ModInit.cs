@@ -3,7 +3,7 @@ using Verse;
 using RimWorld;
 using System.Diagnostics;
 
-namespace RimWorldAdvancedAIMod
+namespace Source.Utils
 {
     [StaticConstructorOnStartup]
     public static class ModInit

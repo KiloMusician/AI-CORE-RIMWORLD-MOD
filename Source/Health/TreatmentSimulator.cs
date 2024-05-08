@@ -2,7 +2,7 @@ using System;
 using Verse;  // Namespace for many game-related classes
 using RimWorld;  // Namespace for RimWorld-specific classes
 
-namespace RimWorldAIEnhanced.Source.Health
+namespace Source.Health
 {
     public static class TreatmentSimulator
     {

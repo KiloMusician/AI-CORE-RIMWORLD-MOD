@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef ParentName="BaseItem">
+        <defName>AIEnhancedSuperComputer</defName>
+        <label>super computer</label>
+        <description>A highly advanced computer that enhances the research capabilities of your colony.</description>
+        <thingCategories>
+            <li>ItemsSpecial</li>
+        </thingCategories>
+        <statBases>
+            <MarketValue>2500</MarketValue>
+            <Mass>10.0</Mass>
+        </statBases>
+        <tradeTags>
+            <li>HighTech</li>
+        </tradeTags>
+    </ThingDef> <!-- Add this closing tag -->
+</Defs>

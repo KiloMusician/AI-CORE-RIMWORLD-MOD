@@ -2,7 +2,7 @@ using NUnit.Framework;
 using Verse;
 using RimWorld;
 
-namespace RimWorldAIEnhanced.Tests.IntegrationTests
+namespace Tests.IntegrationTests
 {
     [TestFixture]
     public class GameplayTests

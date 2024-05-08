@@ -2,7 +2,7 @@ using UnityEngine;
 using Verse;
 using RimWorld; // Added missing using statement for RimWorld namespace
 
-namespace RimWorldAIEnhanced.Source.UI.Widgets
+namespace Source.UI.Widgets
 {
     public class HealthStatusWidget
     {

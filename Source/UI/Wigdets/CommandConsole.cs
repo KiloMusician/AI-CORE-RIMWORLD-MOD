@@ -2,7 +2,7 @@ using UnityEngine;
 using Verse;
 using RimWorld; // Add missing import for RimWorld namespace
 
-namespace RimWorldAIEnhanced.Source.UI.Widgets
+namespace Source.UI.Widgets
 {
     public class CommandConsole : Window
     {

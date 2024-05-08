@@ -1,7 +1,7 @@
 using System;
 using Verse;
 
-namespace RimWorldAIEnhanced.Source.Utils
+namespace Source.Utils
 {
     public static class Logger
     {

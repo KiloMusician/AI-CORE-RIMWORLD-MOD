@@ -63,7 +63,7 @@
             },
             "NLog": {
               "target": "Package",
-              "version": "[4.7.10, )"
+              "version": "[5.3.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

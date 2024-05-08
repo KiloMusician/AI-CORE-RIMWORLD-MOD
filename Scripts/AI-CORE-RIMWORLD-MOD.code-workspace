@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../RimWorldWin64_Data/Managed"
+		},
+		{
+			"path": "../../../Data"
+		},
+		{
+			"path": "../../OldestHouse"
+		}
+	],
+	"settings": {
+		"deepscan.enable": true
+	}
+}

@@ -1,0 +1,53 @@
+<AICompanionCore>
+  <ModInfo>
+    <Name>RimWorld AI Enhanced Gameplay Mod</Name>
+    <Description>
+            This mod introduces sophisticated artificial intelligence to RimWorld, enhancing gameplay dynamics and deepening colonist interactions. Features include advanced decision-making, adaptive learning algorithms, and improved health management systems, all aimed at creating a more immersive and responsive game environment. The mod is structured in a modular way, allowing for easy expansion and improved performance.
+        </Description>
+    <Version>1.0</Version>
+    <Author>Kilo.Musician</Author>
+    <Contact>keath.musician91.yyc@gmail.com</Contact>
+    <Repository>http://github.com/KiloMusician/AIEnhancedGameplayMod</Repository>
+  </ModInfo>
+  <Components>
+    <Component Name="AI Core">
+      <Description>Central hub for AI decision-making, integrating several AI techniques to manage NPC behavior and game events effectively.</Description>
+      <Files>
+        <File>Source/AI/Core/AICore.cs</File>
+        <File>Source/AI/Core/DecisionTree.cs</File>
+      </Files>
+    </Component>
+    <Component Name="Learning Algorithms">
+      <Description>Employs machine learning and natural language processing to enable NPCs to learn from interactions and adapt their responses over time.</Description>
+      <Files>
+        <File>Source/AI/Learning/NLPProcessor.cs</File>
+        <File>Source/AI/Learning/LearningModule.cs</File>
+      </Files>
+    </Component>
+    <Component Name="Health Management">
+      <Description>Enhances the health system with AI-driven diagnostics and treatments, offering more realistic and dynamic health scenarios for NPCs.</Description>
+      <Files>
+        <File>Source/Health/HealthManager.cs</File>
+        <File>Source/Health/TreatmentSimulator.cs</File>
+      </Files>
+    </Component>
+    <Component Name="User Interface">
+      <Description>Improves player interaction with AI elements through a redesigned UI, facilitating better control and visualization of AI functions.</Description>
+      <Files>
+        <File>Source/UI/Widgets/CommandConsole.cs</File>
+        <File>Source/UI/Widgets/HealthStatusWidget.cs</File>
+        <File>Source/UI/Dialogs/Dialog_AIInteraction.cs</File>
+      </Files>
+    </Component>
+  </Components>
+  <Dependencies>
+    <Dependency Name="Harmony">
+      <Version>2.0.4</Version>
+      <Description>Enables the patching of methods for mod compatibility and runtime modification.</Description>
+    </Dependency>
+    <Dependency Name="HugsLib">
+      <Version>7.2.1</Version>
+      <Description>Acts as a bridge for mod functionality, offering tools and services essential for mod interoperability.</Description>
+    </Dependency>
+  </Dependencies>
+</AICompanionCore>

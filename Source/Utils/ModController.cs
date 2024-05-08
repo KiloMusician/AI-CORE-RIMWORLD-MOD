@@ -1,7 +1,7 @@
 using HarmonyLib;
 using Verse;
 
-namespace AI_Core_Rimworld_Mod
+namespace Source.Utils
 {
     public class ModController : Mod
     {

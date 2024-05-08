@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 
+namespace Source.Utils
+
 class Program
 {
     static void Main(string[] args)

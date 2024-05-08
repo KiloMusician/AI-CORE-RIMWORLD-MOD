@@ -1,9 +1,9 @@
-using System;
+[]using System;
 using System.Collections.Generic;
 using Verse;
 using UnityEngine;
 
-namespace RimWorldAIEnhanced.Source.Utils
+namespace Source.Utils
 {
     public static class PerformanceOptimizationManager
     {

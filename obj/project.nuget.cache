@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SYu4tKsBawfciKAXcG3I5zWKkb6T1Qi1Z52/mGxBvni6ZQI+Wy8VoXSbzaCUcRh52f5CAOybwW7+OgvOj0kMfg==",
+  "dgSpecHash": "WfryPl3X8F6QmqFE121BWJm3Fwdusn4ceJ1QADbGleD/eJsLz2Vf2bX6ix/Eqm374w2KIyI9NoojateMmPwUPw==",
   "success": true,
   "projectFilePath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AI-CORE-RIMWORLD-MOD\\ModProject.csproj",
   "expectedPackageFiles": [
@@ -18,7 +18,7 @@
     "C:\\Users\\jacob\\.nuget\\packages\\monomod.utils\\25.0.3-prerelease.2\\monomod.utils.25.0.3-prerelease.2.nupkg.sha512",
     "C:\\Users\\jacob\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\jacob\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
-    "C:\\Users\\jacob\\.nuget\\packages\\nlog\\4.7.10\\nlog.4.7.10.nupkg.sha512",
+    "C:\\Users\\jacob\\.nuget\\packages\\nlog\\5.3.2\\nlog.5.3.2.nupkg.sha512",
     "C:\\Users\\jacob\\.nuget\\packages\\serilog\\2.10.0\\serilog.2.10.0.nupkg.sha512",
     "C:\\Users\\jacob\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\jacob\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",

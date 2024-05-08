@@ -1,0 +1,84 @@
+{
+    "deepscan.enable": true,
+    "editor.trimTrailingWhitespace": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/bin": true,
+        "**/obj": true
+    },
+    "files.autoSave": "onFocusChange",
+    "csharp.format.enable": true,
+    "omnisharp.path": "latest",
+    "omnisharp.useGlobalMono": "always",
+    "python.pythonPath": "envs/myenv/python",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "workbench.colorTheme": "Visual Studio Light",
+    "workbench.iconTheme": "vs-seti",
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "taskExplorer.enable": true,
+    "taskExplorer.providerFilter": "all",
+    "extensions.ignoreRecommendations": false,
+    "code-runner.executorMap": {
+        "python": "$pythonPath -u",
+        "csharp": "dotnet run",
+        "javascript": "node"
+    },
+    "code-runner.runInTerminal": true,
+    "search.followSymlinks": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.editor.enablePreview": false,
+    "telemetry.enableTelemetry": false,
+    "workbench.startupEditor": "welcomePage",
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "Build Mod",
+                "command": "dotnet",
+                "type": "process",
+                "args": [
+                    "build",
+                    "${workspaceFolder}/Source/Project.csproj",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+                "group": "build",
+                "presentation": {
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared",
+                    "showReuseMessage": true,
+                    "clear": false
+                },
+                "problemMatcher": "$msCompile"
+            },
+            {
+                "label": "Run Tests",
+                "command": "dotnet",
+                "type": "process",
+                "args": [
+                    "test",
+                    "${workspaceFolder}/Tests"
+                ],
+                "group": "test",
+                "presentation": {
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared",
+                    "showReuseMessage": true,
+                    "clear": false
+                }
+            }
+        ]
+    }
+}
